@@ -14,6 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -131,6 +132,12 @@ extends Editor {
         }
     }
 
+    public void refreshPalettes() {
+    	UI_Generator ui = (UI_Generator)this.getUI();
+    	ui.paletteMenu  = new JComboBox( UI_Generator.paletteMenuString);
+    	System.out.println("In UI_Generator fetchPalettes()");
+     }
+    
     private void requestNumericTextboxButtonsRefresh() {
         if (this.scheduledrefresh != null) {
             this.scheduledrefresh.cancel(false);

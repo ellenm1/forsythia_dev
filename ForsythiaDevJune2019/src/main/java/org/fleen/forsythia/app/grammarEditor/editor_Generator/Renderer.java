@@ -33,6 +33,10 @@ import org.fleen.forsythia.core.composition.ForsythiaComposition;
 import org.fleen.geom_2D.DPoint;
 import org.fleen.geom_2D.DPolygon;
 import org.fleen.util.tree.TreeNode;
+import org.fleen.forsythia.app.grammarEditor.JsonProcessor;
+import org.fleen.forsythia.app.grammarEditor.editor_Generator.Palette;
+import org.fleen.forsythia.app.grammarEditor.editor_Generator.PaletteList;
+import org.fleen.forsythia.app.grammarEditor.editor_Generator.ui.UI_Generator;
 
 public class Renderer
 implements Serializable {
@@ -47,8 +51,11 @@ implements Serializable {
     Graphics2D graphics;
     //private Color strokecolor = Color.gray;
     private Color strokecolor = new Color(1, 0, 0, .1f);
-    public Color[] color0;
-    public Color[] color1;
+   // public static  List<String> color0;
+   // public static List<String> color1;
+    public static Color[] color0;
+    public static Color[] color1;
+    public static PaletteList zpalettelist;
 
     private Map<FPolygonSignature, Color> polygoncolors = new Hashtable<FPolygonSignature, Color>();
     private static final float STROKEWIDTH = 0.000f;
@@ -83,41 +90,7 @@ implements Serializable {
         return image;
     }
     
-   /* static String readFile(String path, Charset encoding) 
-    		  throws IOException 
-    		{
-    		  byte[] encoded = Files.readAllBytes(Paths.get(path));
-
-    		  String line=null;
-    		    List<Palette> palettes = new ArrayList<>();
-    		    while ((line = inputFile.readLine())!= null) {
-    		       StringTokenizer sToken = new StringTokenizer(input, " ");
-    		       list.add(new Palette(sToken.nextToken(),sToken.nextToken(),sToken.nextToken())); 
-    		    }  
-    		  
-    		  return new String(encoded, encoding);
-    		}
-   */
-    
-   public void getFileData() { 
-   //https://www.mkyong.com/java/how-to-read-file-from-java-bufferedreader-example/
-	   StringBuilder sb = new StringBuilder();
-
-    try (BufferedReader br = Files.newBufferedReader(Paths.get("/Users/ellenmeiselman/Google Drive/_Project Notes/fleen/palettelist.txt"))) {
-
-        // read line by line
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-
-    } catch (IOException e) {
-        System.err.format("IOException: %s%n", e);
-    }
-
-    System.out.println(sb);
-
-   }
+ 
     
     
     private AffineTransform getTransform(int imagewidth, int imageheight, ForsythiaComposition composition) {
@@ -141,10 +114,18 @@ implements Serializable {
     private void render(ForsythiaComposition forsythia) {
         Path2D path;
         this.initStroke();
-        getFileData();
+       // getFileData();
+        JsonProcessor jsonprocessor = new JsonProcessor();
+        try {
+			JsonProcessor.getPaletteList(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.initColorPairs();
+        System.out.println("In Renderer render() line 147 selectedPalette="+selectedPalette); 
         for (FPolygon polygon : forsythia.getLeafPolygons()) {
-        	 System.out.println("In Renderer render() line 147 selectedPalette="+selectedPalette); 
+        	
             Color color = this.getColor(polygon,selectedPalette);//ellen changed
             this.graphics.setPaint(color);
             path = this.getPath2D(polygon);
@@ -160,150 +141,9 @@ implements Serializable {
 
     /*  ***  */
     
-    //public static void setPalette(String selectedPaletteString) {
-    public void setPalette(String selectedPaletteString) {
-        System.out.println("In Renderer setPalette 120, I received: " + selectedPaletteString);
-       String sp =  (selectedPaletteString!=null)&&(!selectedPaletteString.isEmpty())?selectedPaletteString:"light coral theme";
-        Color[] colorList0;
-        Color[] colorList1;
 
-        switch(sp) {
-          
-          case "Paragliding Peaches":
-                 colorList0 = new Color[] {  Color.decode("#FF6F5F"), Color.decode("#A7D2D6") };
-                 colorList1 = new Color[]{ Color.white, Color.decode("#FF9D75"),  Color.decode("#FFE39F"),Color.decode("#FFC78C")  };       
-                 setColorPairs(colorList0, colorList1);
-                 break;
 
-          case "Deep Blue":
-                 colorList0 = new Color[] {  Color.decode("#FF6F5F"), Color.decode("#A7D2D6") };
-                 colorList1 = new Color[]{ Color.white, Color.decode("#FF9D75"),  Color.decode("#FFE39F"),Color.decode("#FFC78C")  };       
-                 setColorPairs(colorList0, colorList1);
-                 break;
-
-          case "light coral theme":
-                 colorList0 = new Color[]{ Color.decode("#DBDBDD"), Color.decode("#B6B5B8") };
-                 colorList1 = new Color[]{  Color.decode("#FDD8D3"),  Color.decode("#FBC1B8"),Color.decode("#F9F4F2")  }; 
-                 setColorPairs(colorList0, colorList1);
-                 break;            
-
-          case "gp wedding":
-                colorList0 = new Color[]{ Color.decode("#E4A399"), Color.decode("#EBC4BA") };
-                colorList1 = new Color[]{  Color.decode("#F9EBDF"),  Color.decode("#D0DDD4"),Color.decode("#FFFCA2")  };            
-                setColorPairs(colorList0, colorList1);
-                break;
-
-          case "Guide des associations":
-                 colorList0 = new Color[]{ Color.decode("#CC1B4C"), Color.decode("#511B4C") };
-                 colorList1 = new Color[]{  Color.decode("#82C8B5"),  Color.decode("#FFA33C"),Color.decode("#FF6B41")  };           
-                 setColorPairs(colorList0, colorList1);
-                 break;
-
-          case "2019 BINK Calendar illust":
-                 colorList0 = new Color[]{ Color.decode("#F2F2F2"), Color.decode("#5477BF") };
-                 colorList1 = new Color[]{  Color.decode("#F2C84B"),  Color.decode("#F2921D"),Color.decode("#F24C26")  };           
-                 setColorPairs(colorList0, colorList1);
-                 break;
-          case "Blue sky ocean":
-                colorList0 = new Color[]{  Color.white,  Color.decode("#04658C") };
-                colorList1 = new Color[]{ Color.white,  Color.decode("#9BD9F2"), Color.decode("#1A64A5"),  Color.BLACK,Color.decode("#16808C"),Color.decode("#45A5A5")  };            
-                 setColorPairs(colorList0, colorList1);
-                break;
-         case "Colorful houses at Nyhavn":
-                 colorList0 = new Color[] {  Color.decode("#13318C"), Color.decode("#0A2459") };
-                 colorList1 = new Color[]{ Color.white, Color.decode("#87A5BF"),  Color.decode("#F2B604"),Color.decode("#D84B17")  };       
-                 setColorPairs(colorList0, colorList1);
-                 break;
-            
-         case "teal":
-        	  colorList0 = new Color[]{Color.decode("#023859"), Color.decode("#03658C") };
-        	  colorList1 =new Color[]{ Color.white, Color.decode("#218DA6"),  Color.decode("#B4D2D9"),Color.decode("#50B4BF")  };
-              setColorPairs(colorList0, colorList1);
-              break;  
-         
-         case "mediterranean":
-        	 colorList0 =  new Color[]{Color.decode("#0476D9"), Color.decode("#79BAF2") };
-        	 colorList1 = new Color[]{ Color.white, Color.decode("#0597F2"),  Color.decode("#04BFAD"),Color.decode("#A0A603")  };
-              setColorPairs(colorList0, colorList1);
-              break;
-              
-         case "house in tavira":
-        	 colorList0 = new Color[]{Color.decode("#023373"), Color.decode("#022859") };
-        	 colorList1 =new Color[]{ Color.white, Color.decode("#0468BF"),  Color.decode("#0396A6"),Color.decode("#A68A68")  };
-        	 setColorPairs(colorList0, colorList1);
-             break;
-             
-             
-         case "origami paper3":
-             colorList0 = new Color[]{Color.white, Color.decode("#A41710"), Color.decode("#BEDEC5") };
-             colorList1 = new Color[]{ Color.white, Color.decode("#FEEEDA"),  Color.decode("#BF604B"),Color.decode("#D91A1A")  };     
-             setColorPairs(colorList0, colorList1);
-             break;    
-             
-         case "kimono 3":
-             colorList0 = new Color[]{Color.decode("#BF9039"), Color.decode("#D8BC88") };
-             colorList1 = new Color[]{ Color.white, Color.decode("#FEEEDA"),  Color.decode("#BF604B"),Color.decode("#D91A1A")  };     
-             setColorPairs(colorList0, colorList1);
-             break;    
-             	 
-        	 
-         case "4b107658e5aa935bbac842ca989e17d6":
-             colorList0 = new Color[]{Color.decode("#130E70"), Color.decode("#2D439F") };
-             colorList1 = new Color[]{ Color.white, Color.decode("#D9352E"),  Color.decode("#F84B34"),Color.decode("#F1B702")  };     
-             setColorPairs(colorList0, colorList1);
-             break;  	 
-        	  
-                 //kimono 3
-                 
-                // this.color1 = new Color[]{Color.decode("#BF9039"), Color.decode("#D8BC88") };
-                // this.color0 = new Color[]{ Color.white, Color.decode("#8C4E17"),  Color.decode("#BF574E"),Color.decode("#D89999")  };
-                 //origami paper2
-
-               //  this.color0 = new Color[]{Color.decode("#593B34"), Color.decode("#593257") };
-                // this.color1 = new Color[]{ Color.white, Color.decode("#F2F2F2"),  Color.decode("#A69258"),Color.decode("#F23838")  };
-                 
-             	//deep space
-                // this.color0 = new Color[]{Color.decode("#023372"), Color.decode("#011C3F") };
-                // this.color1 = new Color[]{ Color.white, Color.decode("#026772"),  Color.decode("#028C8C"),Color.decode("#010D00")  };
-              
-             	//Hermosa
-               //  this.color0 = new Color[]{Color.decode("#F2A2B0"), Color.decode("#D7EFF2") };
-               //  this.color1 = new Color[]{  Color.decode("#A9D8D3"),  Color.decode("#91D8CB"),Color.decode("#5FBFA4")  };
-               //Charming little girl - fairy queen
-               //  this.color0 = new Color[]{Color.decode("#A51731"), Color.decode("#3D5901") };
-               //  this.color1 = new Color[]{  Color.decode("#393F0E"),  Color.decode("#8C7A59"),Color.decode("#8C0F0F")  };
-             
-             	
-             	//Slipstream Brewing Company
-              // this.color0 = new Color[]{Color.decode("#021E73"), Color.decode("#3D79F2") };
-                 //   this.color1 = new Color[]{  Color.white,Color.decode("#82B0D9"),  Color.decode("#D9753B"),Color.decode("#BF3F3F")  };
-             	
-             	//red at night shepherds delight
-             	
-                   // this.color0 = new Color[]{Color.decode("#A2A0A8"), Color.decode("#7C6A7C"), Color.white };
-                  //  this.color1 = new Color[]{ Color.decode("#FFF586"), Color.white,Color.decode("#FF8C64"),  Color.decode("#FF6659")  };
-             	//isfahan
-                   // this.color0 = new Color[]{Color.decode("#040FD9"), Color.decode("#030BA6"), Color.white };  
-            
-            
-            
-            /*
-          case "aaa":
-                 colorList0 = new Color[] {  Color.decode("#FF6F5F"), Color.decode("#A7D2D6") };
-                 colorList1 = new Color[]{ Color.white, Color.decode("#FF9D75"),  Color.decode("#FFE39F"),Color.decode("#FFC78C")  };       
-            break;
-          case "bbb":
-                 colorList0 = new Color[] {  Color.decode("#FF6F5F"), Color.decode("#A7D2D6") };
-                 colorList1 = new Color[]{ Color.white, Color.decode("#FF9D75"),  Color.decode("#FFE39F"),Color.decode("#FFC78C")  };       
-                 break;
-        */    
-          default:
-                  colorList0 = new Color[] {  Color.decode("#FF6F5F"), Color.decode("#A7D2D6") };
-                  colorList1 = new Color[]{  Color.white, Color.decode("#FF9D75"), Color.decode("#FFE39F"), Color.decode("#FFC78C") };      
-                  setColorPairs(colorList0, colorList1);
-        }
-
-    }
+ //   }
 /* *** */
     public void setColorPairs(Color[] zcolor0, Color[] zcolor1) {
         //this.color0 = new Color[]{this.getRandomGoodColor(16), this.getRandomGoodColor(16)};
@@ -316,7 +156,7 @@ implements Serializable {
       //  zobj.get(0) = zcolor0;
        // zobj.get(1) = zcolor1;
        // return zobj;
-      System.out.println("color0= "+this.color0 + "color1="+color1);
+      System.out.println("In Renderer line 395 color0= "+this.color0 + "color1="+color1);
     }   
     
     
@@ -345,60 +185,14 @@ implements Serializable {
     
     private void initColorPairs() {
 
-        //this.color0 = new Color[]{this.getRandomGoodColor(16), this.getRandomGoodColor(16)};
-
-      //  this.color0 = new Color[]{ Color.LIGHT_GRAY, Color.BLACK, Color.getHSBColor(48, 41, 100), this.getRandomGoodColor(5)};
-    	//black and white
-    //	this.color0 = new Color[]{ this.getRandomGoodColor(16),Color.white,Color.LIGHT_GRAY, Color.BLACK };
-      //  this.color1 = new Color[]{ Color.white,Color.DARK_GRAY };
-            
-       //teal
-        //this.color0 = new Color[]{Color.decode("#023859"), Color.decode("#03658C") };
-       //this.color1 = new Color[]{ Color.white, Color.decode("#218DA6"),  Color.decode("#B4D2D9"),Color.decode("#50B4BF")  };
-//color.adobe.com
-        
-      //mediterranean
-      //  this.color0 = new Color[]{Color.decode("#0476D9"), Color.decode("#79BAF2") };
-      //  this.color1 = new Color[]{ Color.white, Color.decode("#0597F2"),  Color.decode("#04BFAD"),Color.decode("#A0A603")  };
-//house in tavira
-     //   this.color0 = new Color[]{Color.decode("#023373"), Color.decode("#022859") };
-      //  this.color1 = new Color[]{ Color.white, Color.decode("#0468BF"),  Color.decode("#0396A6"),Color.decode("#A68A68")  };
-      //origami paper3
-      //  this.color0 = new Color[]{Color.white, Color.decode("#A41710"), Color.decode("#BEDEC5") };
-      // this.color1 = new Color[]{ Color.white, Color.decode("#FEEEDA"),  Color.decode("#BF604B"),Color.decode("#D91A1A")  };
-        
-        //kimono 3
-        
-       // this.color1 = new Color[]{Color.decode("#BF9039"), Color.decode("#D8BC88") };
-       // this.color0 = new Color[]{ Color.white, Color.decode("#8C4E17"),  Color.decode("#BF574E"),Color.decode("#D89999")  };
-        //origami paper2
-
-      //  this.color0 = new Color[]{Color.decode("#593B34"), Color.decode("#593257") };
-       // this.color1 = new Color[]{ Color.white, Color.decode("#F2F2F2"),  Color.decode("#A69258"),Color.decode("#F23838")  };
-        
-    	//deep space
-       // this.color0 = new Color[]{Color.decode("#023372"), Color.decode("#011C3F") };
-       // this.color1 = new Color[]{ Color.white, Color.decode("#026772"),  Color.decode("#028C8C"),Color.decode("#010D00")  };
      
-    	//Hermosa
-      //  this.color0 = new Color[]{Color.decode("#F2A2B0"), Color.decode("#D7EFF2") };
-      //  this.color1 = new Color[]{  Color.decode("#A9D8D3"),  Color.decode("#91D8CB"),Color.decode("#5FBFA4")  };
-      //Charming little girl - fairy queen
-      //  this.color0 = new Color[]{Color.decode("#A51731"), Color.decode("#3D5901") };
-      //  this.color1 = new Color[]{  Color.decode("#393F0E"),  Color.decode("#8C7A59"),Color.decode("#8C0F0F")  };
-    
-    	
-    	//Slipstream Brewing Company
-     // this.color0 = new Color[]{Color.decode("#021E73"), Color.decode("#3D79F2") };
-        //   this.color1 = new Color[]{  Color.white,Color.decode("#82B0D9"),  Color.decode("#D9753B"),Color.decode("#BF3F3F")  };
-    	
-    	//red at night shepherds delight
     	
           // this.color0 = new Color[]{Color.decode("#A2A0A8"), Color.decode("#7C6A7C"), Color.white };
          //  this.color1 = new Color[]{ Color.decode("#FFF586"), Color.white,Color.decode("#FF8C64"),  Color.decode("#FF6659")  };
     	//isfahan
           // this.color0 = new Color[]{Color.decode("#040FD9"), Color.decode("#030BA6"), Color.white };
-           this.setPalette(this.selectedPalette);
+          // this.setPalette(this.selectedPalette);
+          zpalettelist.getPalette(zpalettelist, this.selectedPalette);
            
     	
     }
@@ -424,7 +218,30 @@ implements Serializable {
 
      }
 
-  
+     //public static void setPalette(String selectedPaletteString) {
+     public void setPalette(String selectedPaletteString) {
+     	//PaletteList.findPalette( (List<Palette>) zpalettelist, selectedPaletteString);
+         System.out.println("In Renderer setPalette 120, I received: " + selectedPaletteString);
+        String sp =  (selectedPaletteString!=null)&&(!selectedPaletteString.isEmpty())?selectedPaletteString:"light coral theme";
+       
+        List<String> colorArray0;
+        List<String> colorArray1;
+        Palette selectedPalette =  zpalettelist.getPalette(zpalettelist, selectedPaletteString);
+        System.out.println("In Renderer setPalette 225");
+       //ArrayList<String> colorString0.add( selectedPalette.getColorList0());
+       colorArray0 = selectedPalette.getColorList0();//errors out here
+       
+       colorArray1 = selectedPalette.getColorList1();
+         
+        Color str = null;
+    	 for (String i : colorArray0) {
+    		 System.out.println("in Renderer setPalette 237 i="+i);
+    		 //https://stackoverflow.com/questions/46570440/convert-string-to-java-awt-color
+    		// color0[i]=Color.decode(i);
+    	 }
+      color0 = new Color[]{str};
+     
+     }
     
     
     

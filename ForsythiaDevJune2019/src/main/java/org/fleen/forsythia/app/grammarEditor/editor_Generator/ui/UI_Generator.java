@@ -12,6 +12,9 @@ import java.awt.LayoutManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.awt.ItemSelectable;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -21,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.fleen.forsythia.app.grammarEditor.GE;
+import org.fleen.forsythia.app.grammarEditor.JsonProcessor;
 import org.fleen.forsythia.app.grammarEditor.editor_Generator.Editor_Generator;
 import org.fleen.forsythia.app.grammarEditor.editor_Generator.Renderer;
 import org.fleen.forsythia.app.grammarEditor.editor_Generator.ui.PanDetailFloor;
@@ -43,13 +47,15 @@ extends JPanel {
    public PanExportImageSize panexportsize;
    public JLabel lblinfo;
    public String selectedpalette = "Guide des associations"; //ellen changed
+   public static StringBuilder paletteTitles = new StringBuilder();
+   public static String[] paletteMenuString;
    //ellen added
    private Renderer renderer;
    String selectedString(ItemSelectable is) {
        Object selected[] = is.getSelectedObjects();
        return ((selected.length == 0) ? "null" : (String) selected[0]);
      }
-   
+  
    public Renderer getRenderer() {
        if (this.renderer == null) {
            this.renderer = new Renderer();
@@ -75,6 +81,8 @@ extends JPanel {
        gbc_pantop.fill = 1;
        gbc_pantop.gridx = 0;
        gbc_pantop.gridy = 0;
+       
+    		   //["Light Greens","Dark blue glow3","Dark blue glow2","Dark blue glow particle","Patriotic red white blue","pinoy pride","black blue","origami paper 2","black gray","red at night shepherds delight","ren architecture", "vuitton 2", "peach violet","Paragliding Peaches","Deep Blue", "light coral theme","gp wedding","Guide des associations","2019 BINK Calendar illust", "Blue sky ocean","Colorful houses at Nyhavn","house in tavira","origami paper3","kimono 3","4b107658e5aa935bbac842ca989e17d6"];//ellen changed
        this.add((Component)pantop, gbc_pantop);
        this.btngeneratestopgo = new JButton("stopgo foo");
        this.btngeneratestopgo.setBackground(UI.BUTTON_PURPLE);
@@ -150,8 +158,31 @@ extends JPanel {
            }
        });
        //ellen added
-       String[] paletteStrings = { "Paragliding Peaches","Deep Blue", "light coral theme","gp wedding","Guide des associations","2019 BINK Calendar illust", "Blue sky ocean","Colorful houses at Nyhavn","teal","mediterranean","house in tavira","origami paper3","kimono 3","4b107658e5aa935bbac842ca989e17d6"};//ellen changed
-       this.paletteMenu = new JComboBox(paletteStrings);//ellen changed
+       //"dark colors 1","dark colors 2","Weird holiday", "teal","mediterranean"
+      // String[] paletteMenuString = {"Light Greens","Dark blue glow3","Dark blue glow2","Dark blue glow particle","Patriotic red white blue","pinoy pride","black blue","origami paper 2","black gray","red at night shepherds delight","ren architecture", "vuitton 2", "peach violet","Paragliding Peaches","Deep Blue", "light coral theme","gp wedding","Guide des associations","2019 BINK Calendar illust", "Blue sky ocean","Colorful houses at Nyhavn","house in tavira","origami paper3","kimono 3","4b107658e5aa935bbac842ca989e17d6"};//ellen changed
+      // String[] paletteMenuString =  paletteTitles.toString().split(",");
+     
+       
+       //https://stackoverflow.com/a/12899989
+       //how to get the type of a value https://stackoverflow.com/a/15770571
+      // paletteMenuString = paletteTitles.toString().split(","); //this is set over in jsonprocessor
+        if(  (UI_Generator.paletteMenuString != null) && (UI_Generator.paletteMenuString).length > 0 ){
+			 ((UI_Generator)GE.ge.editor_generator.getUI()).refreshPalettes();
+        }
+        else {
+        	 System.out.println("UI_Generator 172 paletteMenuString was null");
+        	 JsonProcessor jsonprocessor = new JsonProcessor();
+        	 try {
+        		 System.out.println("UI_Generator 176 paletteMenuString.length= "+paletteMenuString);
+        		 JsonProcessor.getPaletteList(null);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+	 
+       System.out.println("UI_Generator 166 paletteMenuString.tostring="+paletteMenuString.toString());
+       this.paletteMenu = new JComboBox(paletteMenuString);//ellen changed
        this.paletteMenu.setSelectedIndex(0);//ellen changed
        this.paletteMenu.addActionListener(this.paletteMenu);//ellen changed
        pantop.add((Component)this.paletteMenu, this.paletteMenu);//ellen changed
@@ -173,8 +204,9 @@ extends JPanel {
               
             // Renderer zrenderer = getRenderer();
             // zrenderer.setPalette(selectedString(is));
-             ((UI_Generator)GE.ge.editor_generator.getUI()).selectedpalette = selectedString(is);
-            //public void setPalette(this.selectedString(is));  
+             ((UI_Generator)GE.ge.editor_generator.getUI()).selectedpalette =  selectedString(is);
+             // public void setPalette(this.selectedString(is));  
+             //setPalette(this.selectedString(is))
            }
            
          };
@@ -206,4 +238,10 @@ extends JPanel {
  	//    Object selected[] = is.getSelectedObjects();
  	//    return ((selected.length == 0) ? "null" : (String) selected[0]);
  	//  }
+
+public void refreshPalettes() { //paletteMenuString
+	// TODO Auto-generated method stub
+	// System.out.println("paletteMenuString = "+ UI_Generator.paletteTitles);
+	this.paletteMenu = new JComboBox(UI_Generator.paletteMenuString);
+}
 }

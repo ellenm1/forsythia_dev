@@ -68,6 +68,7 @@ implements Serializable {
         boolean nameIsUsed = true;
         int index = 0;
         while (nameIsUsed) {
+        	//TODO add random string to name so images wont overwrite each other in google drive as the are synced from different places
             test = new File(String.valueOf(this.getExportDirectory().getPath()) + "/" + IMAGEFILEPREFIX + index + ".png");
             if (test.exists()) {
                 ++index;

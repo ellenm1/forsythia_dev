@@ -182,11 +182,10 @@ implements Serializable {
     }
 
     private void resetRenderer(String ps) {
-    	 System.out.println("In resetRenderer185 ps="+ps);
+    	 System.out.println("In Generator>resetRenderer185 ps="+ps);
         this.renderer = new Renderer();
         this.renderer.selectedPalette = ps;
-        System.out.println("In resetRenderer 187 getRenderer().color0 "+getRenderer().color0);
-        //System.out.println("ui.
+        System.out.println("Generator.resetRenderer() 188 this.renderer.selectedPalette= " +this.renderer.selectedPalette);
     }
 
     private void generateComposition() {
@@ -196,10 +195,10 @@ implements Serializable {
     }
 
     private void renderCompositionForViewer() {
-        System.out.println("In Generator renderCompositionsForViewerrender composition for viewer");
+        System.out.println("In Generator.renderCompositionsForViewer() line 198");
         PanViewer viewer = ((UI_Generator)GE.ge.editor_generator.getUI()).panviewer;
         String palettestr = ((UI_Generator)GE.ge.editor_generator.getUI()).selectedpalette;
-        System.out.println("palettestr ="+palettestr);
+        System.out.println("In Generator.renderCompositionsForViewer() line 201 palettestr ="+palettestr);
         this.resetRenderer(palettestr);
         
         this.viewerimage = this.getRenderer().getImage(viewer.getWidth(), viewer.getHeight(), this.composition);
