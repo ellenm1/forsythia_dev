@@ -7,6 +7,7 @@ DONE: have it read palettes from an external text file, change the palette menu,
 TODO: clean up all the debugging lines and add a default selection in the palette menu.  
 TODO: make it all look nicer. Look for UI libraries.  
 TODO: Add something that searches adobe's color api's for palettes based on keywords, reads a color.adobe.com palette by name or whatever makes sense.   
-TODO Add a menu for stroke width and color.   
+TODO Add a menu for stroke width and color.  
+TODO: Make the path to the JSON file settable from the UI.
 Then see what else comes to mind.   
 
