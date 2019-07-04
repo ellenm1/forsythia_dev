@@ -1,0 +1,189 @@
+{
+   "palettelist" :
+    [
+    {  
+        "title":"Patriotic red white blue",
+        "colorList0":[  
+           "#F2ECDC",
+           "#1A2A70"  ],
+        "colorList1":[  
+           "#2B3594", 
+            "#A50825",
+             "#BF0335",
+            "#FFFFFF"
+       ] 
+    },
+         {  
+        "title":"Guide des associations", 
+        "colorList0":[  
+           "#CC1B4C",
+           "#82C8B5",
+           "#511B4C"
+           ],
+        "colorList1":[  
+          "#82C8B5", 
+           "#FFA33C",
+           "#FF6B41"
+        ] 
+    },
+    {  
+        "title":"pinoy pride", 
+        "colorList0":[  
+           "#F2F2F2",
+           "#0338A5" ,
+           "#D81338",
+            "#0349A5"],
+        "colorList1":[  
+           "#FFFFFF", 
+            "#F2BA16",
+            "#D81338"
+        ] 
+    },
+     {  
+        "title":"Paragliding Peaches", 
+        "colorList0":[  
+           "#FF6F5F",
+           "#A7D2D6"  
+           ],
+        "colorList1":[  
+           "#FFFFFF", 
+            "#FF9D75",
+            "#FFE39F",
+            "#FFC78C"
+        ] 
+    },
+
+       {  
+        "title":"light coral theme", 
+        "colorList0":[  
+           "#DBDBDD",
+           "#B6B5B8"  
+           ],
+        "colorList1":[  
+           "#FDD8D3", 
+            "#FBC1B8",
+            "#F9F4F2"
+        ] 
+    },
+       {  
+        "title":"2019 BINK Calendar illust", 
+        "colorList0":[  
+           "#F2F2F2",
+           "#5477BF"  
+           ],
+        "colorList1":[  
+           "#F2C84B", 
+           "#F2921D",
+           "#F24C26"
+        ] 
+    },
+       {  
+        "title":"Blue sky ocean", 
+        "colorList0":[  
+           "#FFFFFF",
+           "#04658C"
+          ],
+        "colorList1":[  
+           "#FFFFFF",
+           "#9BD9F2", 
+           "#1A64A5",
+            "#000000",
+            "#16808C",
+            "#45A5A5"
+        ] 
+    },
+       {  
+        "title":"Colorful houses at Nyhavn", 
+        "colorList0":[  
+           "#13318C",
+           "#0A2459"
+          ],
+        "colorList1":[  
+           "#FFFFFF",
+          "#87A5BF", 
+           "#F2B604",
+            "#D84B17" 
+        ] 
+    },
+           {  
+        "title":"renaissance architecture", 
+        "colorList0":[  
+           "#63260A",
+           "#232659",
+           "#A67D4B"
+          ],
+        "colorList1":[  
+           "#F2C36B",
+          "#787E89", 
+           "#787E89" 
+        ] 
+    },
+        {
+       "title":"origami paper3", 
+        "colorList0":[  
+           "#FFFFFF",
+           "#A41710",
+           "#BEDEC5"
+          ],
+        "colorList1":[  
+           "#FFFFFF",
+          "#FEEEDA", 
+           "#BF604B",
+           "#D91A1A" 
+        ] 
+    },
+      {
+      "title":"kimono 3", 
+        "colorList0":[  
+           "#BF9039",
+           "#D8BC88" 
+          ],
+        "colorList1":[  
+           "#FFFFFF",
+          "#FEEEDA", 
+           "#BF604B",
+           "#D91A1A" 
+        ] 
+    },
+      {
+      "title":"4b107658e5aa935", 
+        "colorList0":[ 
+          "#130E70", 
+           "#2D439F" 
+          ],
+        "colorList1":[  
+           "#FFFFFF",
+          "#D9352E", 
+           "#F84B34",
+           "#F1B702" 
+        ] 
+    },
+      {
+          "title":"Dark blue glow particle", 
+        "colorList0":[  
+           "#4392D8",
+           "#02578C" 
+          ],
+        "colorList1":[  
+           "#01273F",
+          "#001726", 
+           "#71C1F2"  
+        ] 
+    },
+  {  
+        "title":"black blue", 
+        "colorList0":[  
+           "#2E4773",
+           "#131A26" 
+           ],
+        "colorList1":[  
+           "#131A26", 
+            "#735922",
+            "#05070C"
+        ] 
+    }
+    ] 
+}
+
+
+ 
