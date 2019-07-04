@@ -2,7 +2,7 @@
 My development sandbox for the Grammar Editor and other aspects of the Forsythia project by John Alexander Greene.  
 
 Using Forsythia Grammar Editor to learn some Java.   
-DONE: Added a palette menu and some color palettes. Made the stroke width as thin as possible.  
+DONE: Added a palette menu and some color palettes. Made the stroke width as thin as possible and gray.  
 DONE: have it read palettes from an external text file, change the palette menu, change the colors in the renderer instance.   
 TODO: clean up all the debugging lines and add a default selection in the palette menu.  
 TODO: make it all look nicer. Look for UI libraries.  
