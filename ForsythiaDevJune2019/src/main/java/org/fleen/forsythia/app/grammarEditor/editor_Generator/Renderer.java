@@ -184,8 +184,7 @@ implements Serializable {
     
     
     private void initColorPairs() {
-
-     
+   
     	
           // this.color0 = new Color[]{Color.decode("#A2A0A8"), Color.decode("#7C6A7C"), Color.white };
          //  this.color1 = new Color[]{ Color.decode("#FFF586"), Color.white,Color.decode("#FF8C64"),  Color.decode("#FF6659")  };
@@ -199,9 +198,7 @@ implements Serializable {
 
  
      private Color getRandomGoodColor(int integer) {
-
         // Color c = new Color(64 + this.rnd.nextInt(12) * 16, 64 + this.rnd.nextInt(12) * 16, 64 + this.rnd.nextInt(12) * 16);
-
            Color c = new Color(64 + this.rnd.nextInt(12) * integer, 16 + this.rnd.nextInt(12) * integer, 64 + this.rnd.nextInt(12) * integer); //ellen changed
 
          return c;
@@ -211,33 +208,22 @@ implements Serializable {
   
 
      private void initStroke() {
-
         // this.stroke = new BasicStroke(0.008f, 2, 1, 0.0f, null, 0.0f);
-
          this.stroke = new BasicStroke(0.000f, 1, 1, 0.0f, null, 0.0f);
-
      }
 
-     //public static void setPalette(String selectedPaletteString) {
-     public void setPalette(String selectedPaletteString) {
-     	//PaletteList.findPalette( (List<Palette>) zpalettelist, selectedPaletteString);
-         System.out.println("In Renderer setPalette 120, I received: " + selectedPaletteString);
-        String sp =  (selectedPaletteString!=null)&&(!selectedPaletteString.isEmpty())?selectedPaletteString:"light coral theme";
-       
+     
+     public void setPalette(String selectedPaletteString) {     	
+        System.out.println("In Renderer setPalette 120, I received: " + selectedPaletteString);
+        String sp =  (selectedPaletteString!=null)&&(!selectedPaletteString.isEmpty())?selectedPaletteString:"light coral theme";      
         List<String> colorArray0;
         List<String> colorArray1;
         Palette selectedPalette =  zpalettelist.getPalette(zpalettelist, selectedPaletteString);
-        System.out.println("In Renderer setPalette 225");
-       //ArrayList<String> colorString0.add( selectedPalette.getColorList0());
-       colorArray0 = selectedPalette.getColorList0();//errors out here
-       
-       colorArray1 = selectedPalette.getColorList1();
-         
+        colorArray0 = selectedPalette.getColorList0();//errors out here
+        colorArray1 = selectedPalette.getColorList1();         
         Color str = null;
     	 for (String i : colorArray0) {
-    		 System.out.println("in Renderer setPalette 237 i="+i);
-    		 //https://stackoverflow.com/questions/46570440/convert-string-to-java-awt-color
-    		// color0[i]=Color.decode(i);
+    		 System.out.println("in Renderer setPalette 237 i="+i);    		
     	 }
       color0 = new Color[]{str};
      

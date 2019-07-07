@@ -31,8 +31,8 @@ import org.fleen.forsythia.app.grammarEditor.editor_Generator.ui.UI_Generator;
 import org.fleen.forsythia.app.grammarEditor.util.UI;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
+//import com.google.gson.stream.JsonReader;
+//import com.google.gson.stream.JsonToken;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
@@ -42,13 +42,16 @@ import org.fleen.forsythia.app.grammarEditor.UIMain;
 
 public class JsonProcessor {
 
-//https://medium.com/@ssaurel/parse-and-write-json-data-in-java-with-gson-a61f8772e786	
 	public static PaletteList getPaletteList(String args[]) throws IOException {
 	Gson gson = new Gson();
 	 BufferedReader br = null;
 	 try {
-	   br = new BufferedReader(new FileReader("/Users/ellenmeiselman/Google Drive/_Project Notes/fleen/palettelist.txt"));
-	   System.out.println( "JsonProcessor 51" );
+	 //  br = new BufferedReader(new FileReader("/Users/[name]/[pathto]/palettelist.txt"));
+		 File importdir = GE.ge.getLocalDir();
+		 String importstr = importdir.getPath();
+		  importstr  += "/palettelist.txt";
+		  br = new BufferedReader(new FileReader(importstr));
+		 System.out.println( "JsonProcessor 51" );
 	 
 	    PaletteList palettelist =   gson.fromJson(br, PaletteList.class);	   
 	   
@@ -58,19 +61,13 @@ public class JsonProcessor {
 		   Renderer.zpalettelist = palettelist;
 		  
 	     for (Palette t : palettelist.getPaletteList()) {	    	
-	       //System.out.println("JsonProcessor 59="+ t.getTitle() + " - " + t.getColorList0() );
 	       UI_Generator.paletteTitles.append(t.getTitle()+","); 
 	       UI_Generator.paletteMenuString = UI_Generator.paletteTitles.toString().split(",");
-	      // Renderer.color0 = t.getColorList0();
-	     // Renderer.color1 = t.getColorList1();
-	     }//end for
+	       } 
 	     
-	   }//end if
+	   } 
 	  	     
-	    // UI_Generator.panviewer.paletteMenu = new JComboBox( UI_Generator.paletteMenuString);
-	     //create a new methodin UI_Generator to refresh the jcombobox.
-	     //https://stackoverflow.com/a/49411906 how to change jcombobox options
-	     //((UI_Generator)GE.ge.editor_generator.getUI()).refreshPalettes();
+	   
 	   
 	  } catch (FileNotFoundException e) {
 	    e.printStackTrace();

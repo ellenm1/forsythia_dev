@@ -34,6 +34,8 @@ implements Serializable {
 
     public void setExportDirectory(File f) {
         this.exportdirectory = f;
+        System.out.println("ImageExporter 37 f.getPath()="+ f.getPath());
+         GE.ge.importdirectory = f.getPath(); //getPath outputs a string
     }
 
     public File getExportDirectory() {

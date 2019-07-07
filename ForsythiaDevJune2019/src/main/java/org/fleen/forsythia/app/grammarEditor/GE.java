@@ -51,6 +51,7 @@ implements Serializable {
     public ProjectMetagon focusmetagon = null;
     public ProjectJig focusjig = null;
     public GrammarImportExport grammarimportexport = new GrammarImportExport();
+    public static String importdirectory = null;
     static final String GEINSTANCEFILENAME = "GE.instance";
     public static final boolean DEBUG = false;
     public static GE ge = null;
@@ -164,8 +165,9 @@ implements Serializable {
             x.printStackTrace();
         }
     }
-
-    public static final void main(String[] a) {
+  
+    
+    public static final void main(String[] a){
         ge = GE.loadInstance();
         String ps;
         if (ge != null) {

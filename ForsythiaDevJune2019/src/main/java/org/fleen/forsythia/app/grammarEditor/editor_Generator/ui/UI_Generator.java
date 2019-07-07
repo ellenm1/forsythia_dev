@@ -49,7 +49,7 @@ extends JPanel {
    public String selectedpalette = "Guide des associations"; //ellen changed
    public static StringBuilder paletteTitles = new StringBuilder();
    public static String[] paletteMenuString;
-   //ellen added
+
    private Renderer renderer;
    String selectedString(ItemSelectable is) {
        Object selected[] = is.getSelectedObjects();
@@ -62,7 +62,7 @@ extends JPanel {
        }
        return this.renderer;
    }
-  //end ellen added 
+ 
 
    public UI_Generator() {
 	   System.out.println("In UI_Generator() AAX selectedpalette="+this.selectedpalette);
@@ -81,8 +81,7 @@ extends JPanel {
        gbc_pantop.fill = 1;
        gbc_pantop.gridx = 0;
        gbc_pantop.gridy = 0;
-       
-    		   //["Light Greens","Dark blue glow3","Dark blue glow2","Dark blue glow particle","Patriotic red white blue","pinoy pride","black blue","origami paper 2","black gray","red at night shepherds delight","ren architecture", "vuitton 2", "peach violet","Paragliding Peaches","Deep Blue", "light coral theme","gp wedding","Guide des associations","2019 BINK Calendar illust", "Blue sky ocean","Colorful houses at Nyhavn","house in tavira","origami paper3","kimono 3","4b107658e5aa935bbac842ca989e17d6"];//ellen changed
+           		  
        this.add((Component)pantop, gbc_pantop);
        this.btngeneratestopgo = new JButton("stopgo foo");
        this.btngeneratestopgo.setBackground(UI.BUTTON_PURPLE);
@@ -157,11 +156,7 @@ extends JPanel {
                GE.ge.editor_generator.openAboutPopup();
            }
        });
-       //ellen added
-       //"dark colors 1","dark colors 2","Weird holiday", "teal","mediterranean"
-      // String[] paletteMenuString = {"Light Greens","Dark blue glow3","Dark blue glow2","Dark blue glow particle","Patriotic red white blue","pinoy pride","black blue","origami paper 2","black gray","red at night shepherds delight","ren architecture", "vuitton 2", "peach violet","Paragliding Peaches","Deep Blue", "light coral theme","gp wedding","Guide des associations","2019 BINK Calendar illust", "Blue sky ocean","Colorful houses at Nyhavn","house in tavira","origami paper3","kimono 3","4b107658e5aa935bbac842ca989e17d6"};//ellen changed
-      // String[] paletteMenuString =  paletteTitles.toString().split(",");
-     
+  
        
        //https://stackoverflow.com/a/12899989
        //how to get the type of a value https://stackoverflow.com/a/15770571
