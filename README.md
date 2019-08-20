@@ -11,6 +11,7 @@ TODO: Clean up all the debugging lines and add a default selection in the palett
 TODO: Make it all look nicer. Look for UI libraries.  
 TODO: Add something that searches adobe's color api's for palettes based on keywords, reads a color.adobe.com palette by name or whatever makes sense.   
 TODO: Add a menu for stroke width and color.
+
 TODO: Add filter tags for stroke width and color, so it will vary over the image.
 TODO: Hetting tired of hexagonal grid - look into what can be done about that. 
 TODO: Make the path to the JSON file settable from the UI.
