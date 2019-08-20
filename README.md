@@ -17,7 +17,7 @@ TODO: Make the path to the JSON file settable from the UI.
 Then see what else comes to mind.   
 
 
-=======
+
 Download latest runnable jar from 
 https://drive.google.com/open?id=1uGX-iZK80jhsJlgBR5QINNWsgR3kSfdK
 Put in /bin folder next to palettelist.txt
