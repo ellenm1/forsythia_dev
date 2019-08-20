@@ -3,7 +3,6 @@ My development sandbox for the Grammar Editor and other aspects of the Forsythia
 
 Using Forsythia Grammar Editor to learn some Java.   
 DONE: Added a palette menu and some color palettes. Made the stroke width as thin as possible.  
-=======
 DONE: Added a palette menu and some color palettes. Made the stroke width as thin as possible and gray.  
 DONE: Set default mode to Intermittant, Stopped, default export image size to 4800.
 DONE: have it read palettes from an external text file, change the palette menu, change the colors in the renderer instance.   
